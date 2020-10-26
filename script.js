@@ -15,7 +15,20 @@ const renderTodos = () => {
         const todoElement = document.createElement('li')
         const todoText = document.createTextNode(todo)
 
+        const linkElement = document.createElement('a')
+
+        linkElement.setAttribute('href', '#')
+
+        position = todos.indexOf(todo)
+        linkElement.setAttribute('onclick', `deleteTodo(${position})`)
+
+        const linkText = document.createTextNode('Excluir')
+
+        linkElement.appendChild(linkText)
+
         todoElement.appendChild(todoText)
+        todoElement.appendChild(linkElement)
+
         listElement.appendChild(todoElement)
     }
 }
@@ -33,3 +46,9 @@ const addTodo = () => {
 }
 
 buttonElement.onclick = addTodo
+
+const deleteTodo = (position) => {
+    todos.splice(position, 1)
+
+    renderTodos()
+}
